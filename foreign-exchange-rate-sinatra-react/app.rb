@@ -35,11 +35,6 @@ get "/currencies_list" do
   uri = URI(url)
   response = Net::HTTP.get(uri)
   response_obj = JSON.parse(response)
-  # currencies_list = []
-  # response_obj["rates"].keys.unshift("EUR").each_with_index do |val, index|
-  #   currencies_list << {"id" => index, "title" => val, "selected" => false, "type" => "base"}
-  # end
-  # currencies_list.to_json
   response_obj["rates"].keys.unshift("EUR").to_json
 end
 
