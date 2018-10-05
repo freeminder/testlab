@@ -2,6 +2,7 @@ import React from "react";
 import Currencies from "./components/currencies";
 import Amount from "./components/amount";
 import axios from "axios";
+import "./styles/global.css";
 
 class App extends React.Component {
   constructor(props) {
@@ -75,7 +76,7 @@ class App extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className="App">
         <p>Foreign Exchange Rate</p>
         <Currencies
           currency_type="Base"
