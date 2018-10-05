@@ -1,4 +1,6 @@
 import React from "react";
+import Currencies from "./components/currencies";
+import Amount from "./components/amount";
 import axios from "axios";
 
 class App extends React.Component {
@@ -63,28 +65,19 @@ class App extends React.Component {
     return (
       <div>
         <p>Foreign Exchange Rate</p>
-        <select value={this.state.base_currency} onChange={this.handleBCChange}>
-          {this.state.base_currencies.map(base_currency => (
-            <option key={base_currency}>{base_currency}</option>
-          ))}
-        </select>
-        <select
+        <Currencies
+          currency_type="Base"
+          currencies={this.state.base_currencies}
+          value={this.state.base_currency}
+          onChange={this.handleBCChange}
+        />
+        <Currencies
+          currency_type="Foreign"
+          currencies={this.state.foreign_currencies}
           value={this.state.foreign_currency}
           onChange={this.handleFCChange}
-        >
-          {this.state.foreign_currencies.map(foreign_currency => (
-            <option key={foreign_currency}>{foreign_currency}</option>
-          ))}
-        </select>
-        <label>
-          Amount:
-          <input
-            name="amount"
-            type="number"
-            value={this.state.amount}
-            onChange={this.handleAChange}
-          />
-        </label>
+        />
+        <Amount value={this.state.amount} onChange={this.handleAChange} />
         <button onClick={this.handleClick}>Get Rate</button>
         {this.state.return_message.status === "success" && (
           <p>{this.state.return_message.total}</p>

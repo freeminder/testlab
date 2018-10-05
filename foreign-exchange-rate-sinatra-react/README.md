@@ -28,6 +28,7 @@
 ## Example requests
 
 Request method: **POST**
+
 Parameters hash:
 
     "base_currency"=>"USD", "foreign_currency"=>"EUR", "amount"=>"22"
