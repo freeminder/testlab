@@ -14,6 +14,7 @@ class App extends React.Component {
       foreign_currencies: [],
       return_message: ""
     };
+    this.prevState = this.state;
     this.handleAChange = this.handleAChange.bind(this);
     this.handleBCChange = this.handleBCChange.bind(this);
     this.handleFCChange = this.handleFCChange.bind(this);
@@ -34,6 +35,16 @@ class App extends React.Component {
       .catch(function(error) {
         console.log(error);
       });
+  }
+
+  componentDidUpdate(prevState) {
+    if (
+      this.state.amount !== this.prevState.amount ||
+      this.state.base_currency !== this.prevState.base_currency ||
+      this.state.foreign_currency !== this.prevState.foreign_currency
+    ) {
+      this.handleClick();
+    }
   }
 
   handleAChange(e) {
@@ -59,6 +70,7 @@ class App extends React.Component {
       .catch(function(error) {
         console.log(error);
       });
+    this.prevState = this.state;
   };
 
   render() {
@@ -78,7 +90,6 @@ class App extends React.Component {
           onChange={this.handleFCChange}
         />
         <Amount value={this.state.amount} onChange={this.handleAChange} />
-        <button onClick={this.handleClick}>Get Rate</button>
         {this.state.return_message.status === "success" && (
           <p>{this.state.return_message.total}</p>
         )}
